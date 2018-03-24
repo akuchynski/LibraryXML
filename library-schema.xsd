@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xns:schema xmlns:xns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.it-academy.by/library-schema" xmlns:itacby="http://www.it-academy.by/library-schema"
+	elementFormDefault="qualified">
+
+	<xns:element name="publications">
+		<xns:complexType>
+			<xns:sequence maxOccurs="unbounded">
+				<xns:element name="publication" type="itacby:publication_type" />
+			</xns:sequence>
+		</xns:complexType>
+	</xns:element>
+
+	<xns:complexType name="publication_type">
+		<xns:sequence>
+			<xns:choice>
+				<xns:element name="book" />
+				<xns:element name="magazine" />
+				<xns:element name="newspaper" />
+			</xns:choice>
+			<xns:element name="count" type="xns:int" />
+			<xns:element name="title" type="xns:string" />
+			<xns:element name="year" type="xns:int" />
+			<xns:element name="authors" type="itacby:authors_type" minOccurs="0" />
+			<xns:choice>
+				<xns:element name="reading-room" />
+				<xns:element name="home" type="itacby:home_type" />
+			</xns:choice>
+		</xns:sequence>
+		<xns:attribute name="id" />
+	</xns:complexType>
+
+	<xns:complexType name="authors_type">
+		<xns:sequence maxOccurs="unbounded">
+			<xns:element name="author" type="itacby:author_type" />
+		</xns:sequence>
+	</xns:complexType>
+
+	<xns:complexType name="author_type">
+		<xns:sequence>
+			<xns:element name="name" type="xns:string" />
+			<xns:element name="surname" type="xns:string" />
+		</xns:sequence>
+	</xns:complexType>
+
+	<xns:complexType name="home_type">
+		<xns:sequence>
+			<xns:element name="date" type="xns:int" />
+		</xns:sequence>
+	</xns:complexType>
+</xns:schema>
+
+

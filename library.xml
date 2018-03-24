@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<publications xmlns="http://www.it-academy.by/library-schema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.it-academy.by/library-schema library-schema.xsd">
+
+	<publication id="1">
+		<book />
+		<count>2</count>
+		<title>Book1</title>
+		<year>1568</year>
+		<authors>
+			<author>
+				<name>AuthorName1</name>
+				<surname>AuthorSurname1</surname>
+			</author>
+		</authors>
+		<reading-room />
+	</publication>
+
+	<publication id="2">
+		<book />
+		<count>12</count>
+		<title>Book2</title>
+		<year>1902</year>
+		<authors>
+			<author>
+				<name>AuthorName2</name>
+				<surname>AuthorSurname2</surname>
+			</author>
+			<author>
+				<name>AuthorName3</name>
+				<surname>AuthorSurname3</surname>
+			</author>
+		</authors>
+		<home>
+			<date>21</date>
+		</home>
+	</publication>
+
+	<publication id="3">
+		<magazine />
+		<count>22</count>
+		<title>Magazine1</title>
+		<year>1999</year>
+		<reading-room />
+	</publication>
+
+</publications>
