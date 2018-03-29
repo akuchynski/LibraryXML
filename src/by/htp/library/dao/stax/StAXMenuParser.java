@@ -8,26 +8,44 @@ import javax.xml.stream.XMLStreamReader;
 
 import by.htp.library.bean.Author;
 import by.htp.library.bean.Book;
+import by.htp.library.bean.Magazine;
+import by.htp.library.bean.Newspaper;
+import by.htp.library.bean.Publication;
 
 public class StAXMenuParser {
+	
+	private StAXMenuParser() {
+		throw new IllegalStateException("Utility class");
+	}
 
-	public static Set<Book> process(XMLStreamReader reader) throws XMLStreamException {
-		Set<Book> books = new HashSet<Book>();
-		Book book = null;
+	public static Set<Publication> process(XMLStreamReader reader) throws XMLStreamException {
+		Set<Publication> books = new HashSet<>();
+		Publication book = null;
 		Author author = null;
-		MenuTagName elementName = null;
+		StAXTagName elementName = null;
+		int attr = 0;
 		while (reader.hasNext()) {
 			int type = reader.next();
 			
 			switch (type) {
 			case XMLStreamConstants.START_ELEMENT:
-				elementName = MenuTagName.getElementTagName(reader.getLocalName());
+				elementName = StAXTagName.getElementTagName(reader.getLocalName());
 				
 				switch (elementName) {
 				case PUBLICATION:
+					attr = Integer.parseInt(reader.getAttributeValue(null, "id"));
+					break;
+				case BOOK:
 					book = new Book();
-					Integer id = Integer.parseInt(reader.getAttributeValue(null, "id"));
-					book.setId(id);
+					book.setId(attr);
+					break;
+				case MAGAZINE:
+					book = new Magazine();
+					book.setId(attr);
+					break;
+				case NEWSPAPER:
+					book = new Newspaper();
+					book.setId(attr);
 					break;
 				case AUTHOR:
 					author = new Author();
@@ -65,12 +83,11 @@ public class StAXMenuParser {
 					break;
 				default:
 					break;
-
 				}
 				break;
 
 			case XMLStreamConstants.END_ELEMENT:
-				elementName = MenuTagName.getElementTagName(reader.getLocalName());
+				elementName = StAXTagName.getElementTagName(reader.getLocalName());
 				switch (elementName) {
 
 				case PUBLICATION:

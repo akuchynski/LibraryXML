@@ -2,6 +2,9 @@ package by.htp.library.dao.dom;
 
 import by.htp.library.bean.Author;
 import by.htp.library.bean.Book;
+import by.htp.library.bean.Magazine;
+import by.htp.library.bean.Newspaper;
+import by.htp.library.bean.Publication;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,11 +22,12 @@ import org.xml.sax.SAXException;
 
 public class BooksDomBuilder {
 
-	private Set<Book> books;
+	private Set<Publication> books;
 	private DocumentBuilder docBuilder;
+	private Publication book = null;
 
 	public BooksDomBuilder() {
-		this.books = new HashSet<Book>();
+		this.books = new HashSet<>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
 			docBuilder = factory.newDocumentBuilder();
@@ -32,7 +36,7 @@ public class BooksDomBuilder {
 		}
 	}
 
-	public Set<Book> getBooks() {
+	public Set<Publication> getBooks() {
 
 		return books;
 	}
@@ -45,7 +49,7 @@ public class BooksDomBuilder {
 			NodeList booksList = root.getElementsByTagName("publication");
 			for (int i = 0; i < booksList.getLength(); i++) {
 				Element bookElement = (Element) booksList.item(i);
-				Book book = buildBook(bookElement);
+				Publication book = buildBook(bookElement);
 				books.add(book);
 			}
 		} catch (IOException e) {
@@ -55,8 +59,21 @@ public class BooksDomBuilder {
 		}
 	}
 
-	private Book buildBook(Element bookElement) {
-		Book book = new Book();
+	private Publication buildBook(Element bookElement) {
+
+//		System.out.println(bookElement.getElementsByTagName("book").item(0).getNodeName() == "book");
+		
+		switch (getPublicationType(bookElement)) {
+		case "book":
+			book = new Book();
+			break;
+		case "magazine":
+			book = new Magazine();
+			break;
+		case "newspaper":
+			book = new Newspaper();
+			break;
+		}
 
 		NamedNodeMap attribute = bookElement.getAttributes();
 		Integer bookId = Integer.parseInt(attribute.getNamedItem("id").getTextContent());
@@ -86,5 +103,15 @@ public class BooksDomBuilder {
 		String text = node.getTextContent();
 
 		return text;
+	}
+	
+	private String getPublicationType(Element element) {
+		if(element.getElementsByTagName("book").item(0).getNodeName() == "book"){
+			return "book";
+		} else if (element.getElementsByTagName("magazine").item(0).getNodeName() == "magazine") {
+			return "magazine";
+		}
+
+		return "newspaper";
 	}
 }

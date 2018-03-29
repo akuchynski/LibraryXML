@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Catalog {
 
-	private Set<Book> books;
+	private Set<Publication> books;
 	private String title;
 	private Date createDate;
 
@@ -13,7 +13,7 @@ public class Catalog {
 		super();
 	}
 
-	public Catalog(Set<Book> books, String title, Date createDate) {
+	public Catalog(Set<Publication> books, String title, Date createDate) {
 		super();
 		this.setBooks(books);
 		this.title = title;
@@ -36,11 +36,11 @@ public class Catalog {
 		this.createDate = createDate;
 	}
 
-	public Set<Book> getBooks() {
+	public Set<Publication> getBooks() {
 		return books;
 	}
 
-	public void setBooks(Set<Book> books) {
+	public void setBooks(Set<Publication> books) {
 		this.books = books;
 	}
 

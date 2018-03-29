@@ -11,16 +11,16 @@ public class LibrarianMain {
 		LibraryService service = new CityLibraryServiceImpl();
 
 		// SAXParser
-		Catalog booksCatalog1 = service.getMainCatalog(1);
-		System.out.println(booksCatalog1.getTitle() + ": " + booksCatalog1.getBooks());
+		Catalog ñatalog1 = service.getMainCatalog(1);
+		System.out.println(ñatalog1.getTitle() + ": " + ñatalog1.getBooks());
 
 		// StAXParser
-		Catalog booksCatalog2 = service.getMainCatalog(2);
-		System.out.println(booksCatalog2.getTitle() + ": " + booksCatalog2.getBooks());
+		Catalog ñatalog2 = service.getMainCatalog(2);
+		System.out.println(ñatalog2.getTitle() + ": " + ñatalog2.getBooks());
 
 		// DOMParser
-		Catalog booksCatalog3 = service.getMainCatalog(3);
-		System.out.println(booksCatalog3.getTitle() + ": " + booksCatalog3.getBooks());
+		Catalog ñatalog3 = service.getMainCatalog(3);
+		System.out.println(ñatalog3.getTitle() + ": " + ñatalog3.getBooks());
 
 	}
 }

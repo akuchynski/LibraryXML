@@ -1,12 +1,12 @@
 package by.htp.library.logic.impl;
 
-import by.htp.library.bean.Book;
 import by.htp.library.bean.Catalog;
+import by.htp.library.bean.Publication;
 import by.htp.library.dao.BookDao;
+import by.htp.library.dao.dom.DOMBookDaoImpl;
 import by.htp.library.logic.LibraryService;
-import by.htp.library.dao.impl.DOMBookDaoImpl;
-import by.htp.library.dao.impl.SAXBookDaoImpl;
-import by.htp.library.dao.impl.StAXBookDaoImpl;
+import by.htp.library.dao.sax.SAXBookDaoImpl;
+import by.htp.library.dao.stax.StAXBookDaoImpl;
 
 import java.util.Set;
 
@@ -20,7 +20,7 @@ public class CityLibraryServiceImpl implements LibraryService {
 	public Catalog getMainCatalog(int n) {
 
 		Catalog catalog = new Catalog();
-		Set<Book> books;
+		Set<Publication> books;
 
 		switch (n) {
 		case 1:
