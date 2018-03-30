@@ -6,15 +6,15 @@ import by.htp.library.dao.BookDao;
 
 public class DOMBookDaoImpl implements BookDao {
 
-	Set<Publication> books;
+	Set<Publication> publications;
 
 	@Override
 	public Set<Publication> readAll() {
 
 		BooksDomBuilder domBuilder = new BooksDomBuilder();
-		domBuilder.buildSetBooks("resources/library.xml");
-		books = domBuilder.getBooks();
+		domBuilder.buildSetPublications("resources/library.xml");
+		publications = domBuilder.getPublications();
 
-		return books;
+		return publications;
 	}
 }

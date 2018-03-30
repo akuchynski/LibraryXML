@@ -12,15 +12,15 @@ public class LibrarianMain {
 
 		// SAXParser
 		Catalog ñatalog1 = service.getMainCatalog(1);
-		System.out.println(ñatalog1.getTitle() + ": " + ñatalog1.getBooks());
+		System.out.println(ñatalog1.getTitle() + ": " + ñatalog1.getPublications());
 
 		// StAXParser
 		Catalog ñatalog2 = service.getMainCatalog(2);
-		System.out.println(ñatalog2.getTitle() + ": " + ñatalog2.getBooks());
+		System.out.println(ñatalog2.getTitle() + ": " + ñatalog2.getPublications());
 
 		// DOMParser
 		Catalog ñatalog3 = service.getMainCatalog(3);
-		System.out.println(ñatalog3.getTitle() + ": " + ñatalog3.getBooks());
+		System.out.println(ñatalog3.getTitle() + ": " + ñatalog3.getPublications());
 
 	}
 }

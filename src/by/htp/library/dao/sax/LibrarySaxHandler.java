@@ -15,18 +15,18 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class LibrarySaxHandler extends DefaultHandler {
-	private Set<Publication> bookList = new HashSet<>();
-	private Publication book;
+	private Set<Publication> publicationList = new HashSet<>();
+	private Publication publication;
 	private Author author;
 	private StringBuilder text;
-	private int attr;
+	private int id;
 
-	public Set<Publication> getBookList() {
-		return bookList;
+	public Set<Publication> getPublicationList() {
+		return publicationList;
 	}
-	
+
 	public int getAttr() {
-		return attr;
+		return id;
 	}
 
 	@Override
@@ -35,23 +35,23 @@ public class LibrarySaxHandler extends DefaultHandler {
 		text = new StringBuilder();
 		switch (qName) {
 		case "publication":
-			attr = Integer.parseInt(attributes.getValue("id"));
+			id = Integer.parseInt(attributes.getValue("id"));
 			break;
 		case "author":
 			author = new Author();
 			author.setId(Integer.parseInt(attributes.getValue("id")));
 			break;
 		case "book":
-			book = new Book();
-			book.setId(attr);
+			publication = new Book();
+			publication.setId(id);
 			break;
 		case "magazine":
-			book = new Magazine();
-			book.setId(attr);
+			publication = new Magazine();
+			publication.setId(id);
 			break;
 		case "newspaper":
-			book = new Newspaper();
-			book.setId(attr);
+			publication = new Newspaper();
+			publication.setId(id);
 			break;
 		}
 	}
@@ -66,8 +66,8 @@ public class LibrarySaxHandler extends DefaultHandler {
 		SAXTagName tagName = SAXTagName.valueOf(qName.toUpperCase().replace("-", "_"));
 		switch (tagName) {
 		case PUBLICATION:
-			bookList.add(book);
-			book = null;
+			publicationList.add(publication);
+			publication = null;
 			break;
 		case BOOK:
 			break;
@@ -76,16 +76,16 @@ public class LibrarySaxHandler extends DefaultHandler {
 		case NEWSPAPER:
 			break;
 		case COUNT:
-			book.setCount(Integer.parseInt(text.toString()));
+			publication.setCount(Integer.parseInt(text.toString()));
 			break;
 		case TITLE:
-			book.setTitle(text.toString());
+			publication.setTitle(text.toString());
 			break;
 		case YEAR:
-			book.setYear(Integer.parseInt(text.toString()));
+			publication.setYear(Integer.parseInt(text.toString()));
 			break;
 		case AUTHOR:
-			book.setAuthor(author);
+			publication.setAuthor(author);
 			author = null;
 			break;
 		case NAME:
@@ -106,12 +106,12 @@ public class LibrarySaxHandler extends DefaultHandler {
 			break;
 		}
 	}
-	
+
 	@Override
 	public void warning(SAXParseException exception) {
 		System.err.println("Warning: line " + exception.getLineNumber() + ": " + exception.getMessage());
 	}
-	
+
 	@Override
 	public void error(SAXParseException exception) {
 		System.err.println("Error: line " + exception.getLineNumber() + ": " + exception.getMessage());

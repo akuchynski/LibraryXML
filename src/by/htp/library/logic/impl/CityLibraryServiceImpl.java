@@ -20,30 +20,26 @@ public class CityLibraryServiceImpl implements LibraryService {
 	public Catalog getMainCatalog(int n) {
 
 		Catalog catalog = new Catalog();
-		Set<Publication> books;
+		Set<Publication> publications;
 
 		switch (n) {
 		case 1:
-			books = dao1.readAll();
-			catalog.setBooks(books);
-			catalog.setTitle("SAX_BOOK_CATALOG");
+			publications = dao1.readAll();
+			catalog.setPublications(publications);
+			catalog.setTitle("SAX_PARSED_CATALOG");
 			break;
 		case 2:
-			books = dao2.readAll();
-			catalog.setBooks(books);
-			catalog.setTitle("StAX_BOOK_CATALOG");
+			publications = dao2.readAll();
+			catalog.setPublications(publications);
+			catalog.setTitle("StAX_PARSED_CATALOG");
 			break;
 		case 3:
-			books = dao3.readAll();
-			catalog.setBooks(books);
-			catalog.setTitle("DOM_BOOK_CATALOG");
+			publications = dao3.readAll();
+			catalog.setPublications(publications);
+			catalog.setTitle("DOM_PARSED_CATALOG");
 			break;
 		}
 
 		return catalog;
-	}
-
-	public void getMainCatalog() {
-
 	}
 }

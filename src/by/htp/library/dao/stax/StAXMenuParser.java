@@ -13,39 +13,39 @@ import by.htp.library.bean.Newspaper;
 import by.htp.library.bean.Publication;
 
 public class StAXMenuParser {
-	
+
 	private StAXMenuParser() {
 		throw new IllegalStateException("Utility class");
 	}
 
 	public static Set<Publication> process(XMLStreamReader reader) throws XMLStreamException {
-		Set<Publication> books = new HashSet<>();
-		Publication book = null;
+		Set<Publication> publications = new HashSet<>();
+		Publication publication = null;
 		Author author = null;
 		StAXTagName elementName = null;
-		int attr = 0;
+		int id = 0;
 		while (reader.hasNext()) {
 			int type = reader.next();
-			
+
 			switch (type) {
 			case XMLStreamConstants.START_ELEMENT:
 				elementName = StAXTagName.getElementTagName(reader.getLocalName());
-				
+
 				switch (elementName) {
 				case PUBLICATION:
-					attr = Integer.parseInt(reader.getAttributeValue(null, "id"));
+					id = Integer.parseInt(reader.getAttributeValue(null, "id"));
 					break;
 				case BOOK:
-					book = new Book();
-					book.setId(attr);
+					publication = new Book();
+					publication.setId(id);
 					break;
 				case MAGAZINE:
-					book = new Magazine();
-					book.setId(attr);
+					publication = new Magazine();
+					publication.setId(id);
 					break;
 				case NEWSPAPER:
-					book = new Newspaper();
-					book.setId(attr);
+					publication = new Newspaper();
+					publication.setId(id);
 					break;
 				case AUTHOR:
 					author = new Author();
@@ -66,14 +66,14 @@ public class StAXMenuParser {
 				switch (elementName) {
 				case COUNT:
 					Integer count = Integer.parseInt(text);
-					book.setCount(count);
+					publication.setCount(count);
 					break;
 				case TITLE:
-					book.setTitle(text);
+					publication.setTitle(text);
 					break;
 				case YEAR:
 					Integer year = Integer.parseInt(text);
-					book.setYear(year);
+					publication.setYear(year);
 					break;
 				case NAME:
 					author.setName(text);
@@ -91,14 +91,14 @@ public class StAXMenuParser {
 				switch (elementName) {
 
 				case PUBLICATION:
-					books.add(book);
+					publications.add(publication);
 				case AUTHOR:
-					book.setAuthor(author);
+					publication.setAuthor(author);
 				default:
 					break;
 				}
 			}
 		}
-		return books;
+		return publications;
 	}
 }

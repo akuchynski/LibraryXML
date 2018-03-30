@@ -14,7 +14,7 @@ import by.htp.library.dao.BookDao;
 
 public class StAXBookDaoImpl implements BookDao {
 
-	Set<Publication> books;
+	Set<Publication> publications;
 
 	@Override
 	public Set<Publication> readAll() {
@@ -24,12 +24,12 @@ public class StAXBookDaoImpl implements BookDao {
 			InputStream input = new FileInputStream("resources/library.xml");
 
 			XMLStreamReader reader = inputFactory.createXMLStreamReader(input);
-			Set<Publication> books = StAXMenuParser.process(reader);
+			Set<Publication> publications = StAXMenuParser.process(reader);
 
-			return books;
+			return publications;
 		} catch (XMLStreamException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		return books;
+		return publications;
 	}
 }

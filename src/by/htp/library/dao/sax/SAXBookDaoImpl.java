@@ -12,9 +12,9 @@ import by.htp.library.bean.Publication;
 import by.htp.library.dao.BookDao;
 
 public class SAXBookDaoImpl implements BookDao {
-	
-	Set<Publication> books;
-			
+
+	Set<Publication> publications;
+
 	@Override
 	public Set<Publication> readAll() {
 
@@ -23,11 +23,11 @@ public class SAXBookDaoImpl implements BookDao {
 			LibrarySaxHandler handler = new LibrarySaxHandler();
 			reader.setContentHandler(handler);
 			reader.parse(new InputSource("resources/library.xml"));
-			Set<Publication> books = handler.getBookList();
-			return books;
+			Set<Publication> publications = handler.getPublicationList();
+			return publications;
 		} catch (SAXException | IOException e) {
 			e.printStackTrace();
 		}
-		return books;
+		return publications;
 	}
 }
